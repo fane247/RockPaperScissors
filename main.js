@@ -48,6 +48,39 @@ function generateComputerMove(){
 
 }
 
+function playAgain(){
+
+	playAgainResponse = prompt('play again? \n y/n');
+
+	playAgain = true;
+
+	if(playAgainResponse === 'n'){
+
+		playAgain = false;
+
+	} else if(playAgainResponse === 'y'){
+
+		playAgain = true;
+
+	}
+
+	return playAgain;
+}
+
+
+function validateMove(move){
+
+	validMove = false;
+
+	if(move === 'rock' || move === 'paper' || move === 'scissors'){
+
+		validMove = true;
+	}
+
+	return validMove;
+
+}
+
 function run(){
 
 	var playAgain = true;
@@ -55,7 +88,15 @@ function run(){
 	while(playAgain){
 
 		alert('ROCK PAPER SCISSORS!');
-		var player1Choice = prompt('Player1: please choose "rock", "paper" or "scissors"');
+
+		validMove = false;
+
+		do{
+
+			var player1Choice = prompt('Player1: please choose "rock", "paper" or "scissors"');
+			validMove = validateMove(player1Choice);
+
+		} while (validMove);
 
 		computerPlayerChoice = generateComputerMove();
 
@@ -65,17 +106,7 @@ function run(){
 
 		alert(winner + " has won!");
 
-		playAgainResponse = prompt('play again? n/ y/n');
-
-		if(playAgainResponse ==== 'n'){
-
-			playAgain = false;
-
-		}else if(playAgainResponse ==== 'y'){
-
-			playAgain = true;
-
-		}
+		playAgain = playAgain();
 
 	}
 
