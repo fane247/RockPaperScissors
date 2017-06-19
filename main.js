@@ -120,9 +120,21 @@ function run(){
 			}
 
 			alert(result);
-			alert('score: player1 :' + player1Score + ', player2: ' + player2Score);
+			alert('score:' +
+				'\n player1: ' + player1Score + 
+				'\n player2: ' + player2Score);
 
 		}
+
+		if (player1Score > player1Score) {
+
+			alert('player1 has won the game!')
+
+		} else if (player2Score > player1Score){
+
+			alert('player2 has won the game!')
+		}
+
 
 		var playAgain = reset();
 
