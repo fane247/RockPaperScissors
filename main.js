@@ -26,17 +26,57 @@ function calculateWinner(player1Choice, player2Choice){
 
 function generateComputerMove(){
 
-
 	var moveNumber = Math.floor(Math.random()*4);
 	var move = "";
-
 
 	switch(moveNumber){
 
 		case 1:
-			
+			move = 'rock';
+			break;
+
+		case 2:
+			move = 'scissors';
+			break;
+
+		case 3:
+			move = 'paper';
+			break;
 	}
 
+	return move;
 
+}
+
+function run(){
+
+	var playAgain = true;
+
+	while(playAgain){
+
+		alert('ROCK PAPER SCISSORS!');
+		var player1Choice = prompt('Player1: please choose "rock", "paper" or "scissors"');
+
+		computerPlayerChoice = generateComputerMove();
+
+		alert('player2 chose ' + computerPlayerChoice);
+
+		winner = calculateWinner(player1Choice,computerPlayerChoice);
+
+		alert(winner + " has won!");
+
+		playAgainResponse = prompt('play again? n/ y/n');
+
+		if(playAgainResponse ==== 'n'){
+
+			playAgain = false;
+
+		}else if(playAgainResponse ==== 'y'){
+
+			playAgain = true;
+
+		}
+
+	}
 
 }
