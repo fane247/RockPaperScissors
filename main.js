@@ -3,22 +3,22 @@ console.log ('rock paper scissors');
 
 function calculateWinner(player1Choice, player2Choice){
 
-	player1Choice = player1Choice.toLowerCase();
-	player2Choice = player2Choice.toLowerCase();
+	var player1Choice = player1Choice.toLowerCase();
+	var player2Choice = player2Choice.toLowerCase();
 
-	winner = "";
+	var winner = "";
 
-	if (player1Choice === 'rock' && player2Choice === 'paper') winner = "player2";
-	if (player1Choice === 'rock' && player2Choice === 'scissors') winner = "player1";
+	if (player1Choice === 'rock' && player2Choice === 'paper') winner = "player2 has won";
+	if (player1Choice === 'rock' && player2Choice === 'scissors') winner = "player1 has won";
 	if (player1Choice === 'rock' && player2Choice === 'rock') winner = "draw";
 
 	if (player1Choice === 'paper' && player2Choice === 'paper') winner = "draw";
-	if (player1Choice === 'paper' && player2Choice === 'scissors') winner = "player2";
-	if (player1Choice === 'paper' && player2Choice === 'rock') winner = "player1";
+	if (player1Choice === 'paper' && player2Choice === 'scissors') winner = "player2 has won";
+	if (player1Choice === 'paper' && player2Choice === 'rock') winner = "player1 has won";
 
-	if (player1Choice === 'scissors' && player2Choice === 'paper') winner = "player1";
+	if (player1Choice === 'scissors' && player2Choice === 'paper') winner = "player1 has won";
 	if (player1Choice === 'scissors' && player2Choice === 'scissors') winner = "draw";
-	if (player1Choice === 'scissors' && player2Choice === 'rock') winner = "player2";
+	if (player1Choice === 'scissors' && player2Choice === 'rock') winner = "player2 has won";
 
 	return winner;
 }
@@ -26,20 +26,20 @@ function calculateWinner(player1Choice, player2Choice){
 
 function generateComputerMove(){
 
-	var moveNumber = Math.floor(Math.random()*4);
+	var moveNumber = Math.floor(Math.random()*3);
 	var move = "";
 
 	switch(moveNumber){
 
-		case 1:
+		case 0:
 			move = 'rock';
 			break;
 
-		case 2:
+		case 1:
 			move = 'scissors';
 			break;
 
-		case 3:
+		case 2:
 			move = 'paper';
 			break;
 	}
@@ -48,11 +48,12 @@ function generateComputerMove(){
 
 }
 
-function playAgain(){
 
-	playAgainResponse = prompt('play again? \n y/n');
+function reset() {
 
-	playAgain = true;
+	var playAgainResponse = prompt('play again? \n y/n');
+
+	var playAgain = true;
 
 	if(playAgainResponse === 'n'){
 
@@ -60,7 +61,7 @@ function playAgain(){
 
 	} else if(playAgainResponse === 'y'){
 
-		playAgain = true;
+		 playAgain = true;
 
 	}
 
@@ -70,43 +71,60 @@ function playAgain(){
 
 function validateMove(move){
 
-	validMove = false;
+	var inValidMove = true;
 
 	if(move === 'rock' || move === 'paper' || move === 'scissors'){
 
-		validMove = true;
+		inValidMove = false;
 	}
 
-	return validMove;
+	return inValidMove;
 
 }
+
+
+
 
 function run(){
 
 	var playAgain = true;
 
+	var player1Score = 0;
+	var player2Score = 0;
+
 	while(playAgain){
 
 		alert('ROCK PAPER SCISSORS!');
 
-		validMove = false;
+		while(Math.max(player1Score,player2Score)<2){
 
-		do{
+			var inValidMove = true;
 
-			var player1Choice = prompt('Player1: please choose "rock", "paper" or "scissors"');
-			validMove = validateMove(player1Choice);
+			do {
 
-		} while (validMove);
+				var player1Choice = prompt('Player1: please choose "rock", "paper" or "scissors"');
+				inValidMove = validateMove(player1Choice);
 
-		computerPlayerChoice = generateComputerMove();
+			} while (inValidMove);
 
-		alert('player2 chose ' + computerPlayerChoice);
+			var computerPlayerChoice = generateComputerMove();
 
-		winner = calculateWinner(player1Choice,computerPlayerChoice);
+			alert('player2 chose ' + computerPlayerChoice);
 
-		alert(winner + " has won!");
+			var result = calculateWinner(player1Choice,computerPlayerChoice);
 
-		playAgain = playAgain();
+			if (result === 'player2 has won') {
+				player2Score++;
+			}else if(result === 'player1 has won'){
+				player1Score++;
+			}
+
+			alert(result);
+			alert('score: player1 :' + player1Score + ', player2: ' + player2Score);
+
+		}
+
+		var playAgain = reset();
 
 	}
 
